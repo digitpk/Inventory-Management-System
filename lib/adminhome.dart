@@ -17,13 +17,11 @@ class _AdminState extends State<Admin> {
   MaterialColor active = Colors.red;
   MaterialColor notActive = Colors.grey;
   TextEditingController categoryController = TextEditingController();
- // TextEditingController brandController = TextEditingController();
+  // TextEditingController brandController = TextEditingController();
   GlobalKey<FormState> _categoryFormKey = GlobalKey();
- // GlobalKey<FormState> _brandFormKey = GlobalKey();
+  // GlobalKey<FormState> _brandFormKey = GlobalKey();
   // BrandService _brandService = BrandService();
-   CategoryService _categoryService = CategoryService();
-
-
+  CategoryService _categoryService = CategoryService();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +36,9 @@ class _AdminState extends State<Admin> {
                       },
                       icon: Icon(
                         Icons.dashboard,
-                        color: _selectedPage == Page.dashboard ? active : notActive,
+                        color: _selectedPage == Page.dashboard
+                            ? active
+                            : notActive,
                       ),
                       label: Text('Dashboard'))),
               Expanded(
@@ -48,7 +48,8 @@ class _AdminState extends State<Admin> {
                       },
                       icon: Icon(
                         Icons.sort,
-                        color:_selectedPage == Page.manage ? active : notActive,
+                        color:
+                            _selectedPage == Page.manage ? active : notActive,
                       ),
                       label: Text('Manage'))),
             ],
@@ -87,7 +88,7 @@ class _AdminState extends State<Admin> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
                 children: <Widget>[
-             /*     Padding(
+                  /*     Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: Card(
                       child: ListTile(
@@ -106,24 +107,24 @@ class _AdminState extends State<Admin> {
                     padding: const EdgeInsets.all(9.0),
                     child: Card(
                       child: Wrap(
-                      children: <Widget>[
-                         ListTile(
-
-                          title: FlatButton.icon(
-                            onPressed: null,
-                            icon: Icon(Icons.category),
-                            label: Text("Category")),
-                          subtitle: Text(
-                            '23',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: active, fontSize: 60.0),
-
-                          ),
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_)=>ProductCategories()));
-                          }
-                         ),
-                       ],
+                        children: <Widget>[
+                          ListTile(
+                              title: FlatButton.icon(
+                                  onPressed: null,
+                                  icon: Icon(Icons.category),
+                                  label: Text("Category")),
+                              subtitle: Text(
+                                '23',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: active, fontSize: 60.0),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => ProductCategories()));
+                              }),
+                        ],
                       ),
                     ),
                   ),
@@ -141,9 +142,11 @@ class _AdminState extends State<Admin> {
                             style: TextStyle(color: active, fontSize: 60.0),
                           ),
                           onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_)=>ProductList()));
-                        }    
-                        ),
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => ProductList()));
+                          }),
                     ),
                   ),
                   Padding(
@@ -153,7 +156,7 @@ class _AdminState extends State<Admin> {
                           title: FlatButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.tag_faces),
-                              label: Text("Sold")), 
+                              label: Text("Sold")),
                           subtitle: Text(
                             '13',
                             textAlign: TextAlign.center,
@@ -176,7 +179,7 @@ class _AdminState extends State<Admin> {
                           )),
                     ),
                   ),
-                /*  Padding(
+                  /*  Padding(
                     padding: const EdgeInsets.all(9.0),
                     child: Card(
                       child: ListTile(
@@ -190,7 +193,7 @@ class _AdminState extends State<Admin> {
                             style: TextStyle(color: active, fontSize: 60.0),
                           )),
                     ),
-                  ),*/  
+                  ),*/
                 ],
               ),
             ),
@@ -204,17 +207,18 @@ class _AdminState extends State<Admin> {
               leading: Icon(Icons.add),
               title: Text("Add product"),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>HomeMaterial()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => HomeMaterial()));
               },
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.change_history),
-              title: Text("Products list"),
-               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>ProductList()));
-              }    
-            ),
+                leading: Icon(Icons.change_history),
+                title: Text("Products list"),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => ProductList()));
+                }),
             Divider(),
             ListTile(
               leading: Icon(Icons.add_circle),
@@ -225,11 +229,12 @@ class _AdminState extends State<Admin> {
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.category),
-              title: Text("Category list"),
-              onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=>ProductCategories()));
-              }),
+                leading: Icon(Icons.category),
+                title: Text("Category list"),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => ProductCategories()));
+                }),
             Divider(),
           ],
         );
@@ -245,32 +250,32 @@ class _AdminState extends State<Admin> {
         key: _categoryFormKey,
         child: TextFormField(
           controller: categoryController,
-          validator: (value){
-            if(value.isEmpty){
+          validator: (value) {
+            if (value.isEmpty) {
               return 'category cannot be empty';
             }
           },
-          decoration: InputDecoration(
-            hintText: "add category"
-          ),
+          decoration: InputDecoration(hintText: "add category"),
         ),
       ),
       actions: <Widget>[
-        FlatButton(onPressed: (){
-          if(categoryController.text != null){
-            _categoryService.createCategory(categoryController.text);
-          }
-          Fluttertoast.showToast(msg: 'category created');
-          Navigator.pop(context);
-        }, child: Text('ADD')),
-        FlatButton(onPressed: (){
-          Navigator.pop(context);
-        }, child: Text('CANCEL')),
-
+        FlatButton(
+            onPressed: () {
+              if (categoryController.text != null) {
+                _categoryService.createCategory(categoryController.text);
+              }
+              Fluttertoast.showToast(msg: 'category created');
+              Navigator.pop(context);
+            },
+            child: Text('ADD')),
+        FlatButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('CANCEL')),
       ],
     );
 
     showDialog(context: context, builder: (_) => alert);
   }
-
 }

@@ -6,9 +6,10 @@ import 'shopkeeper.dart';
 import 'adminhome.dart';
 import 'placeorder.dart';
 
-void main(){ 
+void main() {
   runApp(new MyApp());
 }
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -19,27 +20,28 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: new HomePage(), 
+      home: new HomePage(),
       routes: <String, WidgetBuilder>{
-        'Customer': (BuildContext context)=> CustPage(),
-        'Shopkeeper': (BuildContext context)=> Admin(),  
+        'Customer': (BuildContext context) => CustPage(),
+        'Shopkeeper': (BuildContext context) => Admin(),
         //'Admin': (BuildContext context)=> Admin(),
         //'Place Order': (BuildContext context)=> PlaceOrder(),
-      
+
         //'Medical': (BuildContext context)=> MedicalLogin(),
         //'Login': (BuildContext context)=> Login(),
 //        'Medical Home': (BuildContext context)=> MedicalHome(),
-
       },
     );
   }
 }
 
-class HomePage extends StatelessWidget{
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var widgetList = ["Customer","Shopkeeper",];
+    var widgetList = [
+      "Customer",
+      "Shopkeeper",
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -48,11 +50,12 @@ class HomePage extends StatelessWidget{
       body: ListView.builder(
           itemCount: widgetList.length,
           shrinkWrap: true,
-          itemBuilder: (builder, index){
+          itemBuilder: (builder, index) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   Navigator.of(context).pushNamed('${widgetList[index]}');
                 },
                 child: Card(
@@ -63,11 +66,14 @@ class HomePage extends StatelessWidget{
                       padding: EdgeInsets.all(16.0),
                       child: Row(
                         children: <Widget>[
-                          Text(widgetList[index], style: TextStyle(color: Colors.black, fontSize: 20.0),),
+                          Text(
+                            widgetList[index],
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20.0),
+                          ),
                           Icon(Icons.keyboard_arrow_right)
                         ],
-                      )
-                  ),
+                      )),
                 ),
               ),
             );

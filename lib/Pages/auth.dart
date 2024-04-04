@@ -18,10 +18,11 @@ class Auth implements BaseAuth {
     final AuthCredential credential = GoogleAuthProvider.getCredential(
         idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
 
-    try{
-      FirebaseUser user = (await _firebaseAuth .signInWithCredential(credential)).user;
+    try {
+      FirebaseUser user =
+          (await _firebaseAuth.signInWithCredential(credential)).user;
       return user;
-    }catch(e){
+    } catch (e) {
       print(e.toString());
       return null;
     }

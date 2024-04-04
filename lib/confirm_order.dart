@@ -8,8 +8,6 @@ class ConfirmOrder extends StatefulWidget {
 class _ConfirmOrderState extends State<ConfirmOrder> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    return Container();
   }
 }

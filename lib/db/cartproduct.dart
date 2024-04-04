@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 
-class CartService{
+class CartService {
   Firestore _firestore = Firestore.instance;
   String ref = 'cart';
 
-  void uploadProduct({String productName, int price, int quantity, String image}){
+  void uploadProduct(
+      {String productName, int price, int quantity, String image}) {
     var id = Uuid();
     String productId = id.v1();
 
@@ -14,11 +15,7 @@ class CartService{
       'id': productId,
       'quantity': quantity,
       'price': price,
-      'picture' :image,
-
+      'picture': image,
     });
-  
-   }
-
-   
+  }
 }
